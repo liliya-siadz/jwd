@@ -2,9 +2,7 @@ package strategy;
 
 import model.Figure;
 import model.Point;
-import util.FigureUtil;
 import util.LineUtil;
-import util.PointUtil;
 
 
 public class TrianglePropertiesStrategy implements FigurePropertiesStrategy {
@@ -17,6 +15,7 @@ public class TrianglePropertiesStrategy implements FigurePropertiesStrategy {
     private double lengthAB;
     private double lengthAC;
     private double lengthBC;
+
     private TrianglePropertiesStrategy() {
     }
 

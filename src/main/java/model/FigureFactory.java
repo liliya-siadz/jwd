@@ -33,8 +33,13 @@ public class FigureFactory {
                 default:
                     break;
             }
+            return figurePostProcessor.process(figure);
         }
-        return figurePostProcessor.process(figure);
+        return figure;
+    }
+
+    public int countProducedFigures() {
+        return figureStorehouse.countOccupiedFigurePlaces();
     }
 }
 

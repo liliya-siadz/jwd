@@ -6,8 +6,8 @@ import model.Point;
 
 public class FigureUtil {
 
-    public static boolean calculateIsExist(FigureType figureType, Point[] points){
-        switch (figureType){
+    public static boolean calculateIsExist(FigureType figureType, Point[] points) {
+        switch (figureType) {
             case LINE:
                 return calculateIsLine(points);
             case TRIANGLE:
@@ -20,36 +20,32 @@ public class FigureUtil {
     }
 
     public static boolean calculateIsLine(Point[] points) {
-        if(points.length == FigureType.LINE.getPointsQuantity()){
+        if (points.length == FigureType.LINE.getPointsQuantity()) {
             return FigureUtil.getIsFigure(points);
-        }else {
+        } else {
             return false;
         }
 
     }
 
     public static boolean calculateIsTriangle(Point[] points) {
-        if(points.length == FigureType.TRIANGLE.getPointsQuantity()){
+        if (points.length == FigureType.TRIANGLE.getPointsQuantity()) {
             if (FigureUtil.getIsFigure(points)) {
                 return PointUtil.countMaxNumberOfPointsOnTheSameLine(points) == 2;
-            }else {
+            } else {
                 return false;
             }
-        }else {
+        } else {
             return false;
         }
     }
 
 
     public static boolean calculateIsSquare(Point[] points) {
-        if(points.length == FigureType.SQUARE.getPointsQuantity()){
-            if (FigureUtil.getIsFigure(points)) {
-                //проверки
-                return false;
-            } else {
-                return false;
-            }
-        }else {
+        if (points.length == FigureType.SQUARE.getPointsQuantity()) {
+            //logics in process...
+            return FigureUtil.getIsFigure(points);
+        } else {
             return false;
         }
 
@@ -85,4 +81,5 @@ public class FigureUtil {
             return false;
         }
     }
+
 }

@@ -67,4 +67,8 @@ public class PointUtil {
         }
         return numberOfPointsOnOneLine;
     }
+
+    public static int[] getLengths(Point[] points) {
+        return null;
+    }
 }

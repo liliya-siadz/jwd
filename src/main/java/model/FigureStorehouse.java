@@ -54,25 +54,29 @@ public class FigureStorehouse {
         return null;
     }
 
-    private boolean checkIsStorehouseEmpty(){
+    private boolean checkIsStorehouseEmpty() {
         for (FigurePlace figurePlace : storehouse) {
-            if(figurePlace!=null){
+            if (figurePlace != null) {
                 return false;
             }
-        }return true;
+        }
+        return true;
     }
+
     public Figure getFromStorage(FigureType figureType, Point[] points) {
-        if(!checkIsStorehouseEmpty()){
+        if (!checkIsStorehouseEmpty()) {
             for (FigurePlace figurePlace : storehouse) {
                 FigureType figurePlaceFigureType = figurePlace.getItem().getFigureType();
                 Point[] figurePlacePoints = figurePlace.getItem().getPoints();
                 int figurePlaceId = figurePlace.getId();
                 if (FigureUtil.getAreFiguresEquals(figurePlaceFigureType, figurePlacePoints, figureType, points)) {
                     return getFromStorage(figurePlaceId);
+                } else {
+                    return null;
                 }
             }
             return null;
-        }else {
+        } else {
             return null;
         }
 
@@ -86,8 +90,18 @@ public class FigureStorehouse {
         if (getIsAnyFreePlace()) {
             storehouse[getFreePlaceIndex()] = item;
             return item.getItem();
-        }else {
+        } else {
             throw new FigureException();
         }
+    }
+
+    public int countOccupiedFigurePlaces() {
+        int numberOfOccupiedFigurePlaces = 0;
+        for (FigurePlace figurePlace : storehouse) {
+            if (figurePlace != null) {
+                numberOfOccupiedFigurePlaces++;
+            }
+        }
+        return numberOfOccupiedFigurePlaces;
     }
 }

@@ -14,7 +14,7 @@ public class LineUtil {
         int a2 = points[1].getCoordinateA();
         int b1 = points[0].getCoordinateB();
         int b2 = points[1].getCoordinateB();
-        double length =  sqrt((pow((a1 - a2), 2) + pow((b1 - b2), 2)));
+        double length = sqrt((pow((a1 - a2), 2) + pow((b1 - b2), 2)));
         return length;
     }
 

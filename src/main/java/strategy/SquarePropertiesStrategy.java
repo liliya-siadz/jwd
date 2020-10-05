@@ -2,9 +2,7 @@ package strategy;
 
 import model.Figure;
 import model.Point;
-import util.FigureUtil;
 import util.LineUtil;
-import util.PointUtil;
 
 public class SquarePropertiesStrategy implements FigurePropertiesStrategy {
 
@@ -19,6 +17,7 @@ public class SquarePropertiesStrategy implements FigurePropertiesStrategy {
     private double lengthAD;
     private double lengthBC;
     private double lengthCD;
+
     private SquarePropertiesStrategy() {
     }
 
@@ -28,8 +27,6 @@ public class SquarePropertiesStrategy implements FigurePropertiesStrategy {
         }
         return instance;
     }
-
-
 
     private void setPoints(Figure figure) {
         Point[] points = figure.getPoints();

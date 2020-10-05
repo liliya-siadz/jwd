@@ -2,7 +2,6 @@ package strategy;
 
 import model.Figure;
 import model.Point;
-import util.FigureUtil;
 import util.LineUtil;
 
 public enum LinePropertiesStrategy implements FigurePropertiesStrategy {
@@ -10,10 +9,8 @@ public enum LinePropertiesStrategy implements FigurePropertiesStrategy {
     /*2 Not Lazy Singleton realization using ENUM
      */
     INSTANCE;
-
     private Point pointA;
     private Point pointB;
-
 
     private void setPoints(Figure figure) {
         Point[] points = figure.getPoints();
