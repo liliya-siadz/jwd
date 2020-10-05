@@ -10,11 +10,9 @@ import util.FigureUtil;
 
 public interface FigurePreProcessor {
 
-    boolean calculateIsExist(FigureType figureType, Point[] points);
-
     default Figure process(FigureType figureType, Point[] points) throws FigureException {
         if (FigureUtil.getIsFigure(points)) {
-            if (calculateIsExist(figureType, points)) {
+            if (FigureUtil.calculateIsExist(figureType, points)) {
                 return FigureFactory.figureStorehouse.getFromStorage(figureType, points);
             } else {
                 throw new FigureNotExistException();

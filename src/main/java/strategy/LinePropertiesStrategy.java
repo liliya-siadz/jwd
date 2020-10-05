@@ -14,9 +14,6 @@ public enum LinePropertiesStrategy implements FigurePropertiesStrategy {
     private Point pointA;
     private Point pointB;
 
-    public static boolean calculateIsExist(Point[] points) {
-        return FigureUtil.getIsFigure(points);
-    }
 
     private void setPoints(Figure figure) {
         Point[] points = figure.getPoints();
@@ -25,12 +22,12 @@ public enum LinePropertiesStrategy implements FigurePropertiesStrategy {
     }
 
     @Override
-    public int calculateArea(Figure figure) {
+    public double calculateArea(Figure figure) {
         return 0;
     }
 
     @Override
-    public int calculatePerimeter(Figure figure) {
+    public double calculatePerimeter(Figure figure) {
         setPoints(figure);
         return LineUtil.calculateLength(pointA, pointB);
     }

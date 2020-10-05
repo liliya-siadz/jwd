@@ -9,7 +9,9 @@ public enum FigureType {
     HEXAGON(6);
 
     private final int pointsQuantity;
-
+    public int getPointsQuantity(){
+        return pointsQuantity;
+    }
     FigureType(int pointsQuantity) {
         this.pointsQuantity = pointsQuantity;
     }

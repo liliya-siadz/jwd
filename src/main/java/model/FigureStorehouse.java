@@ -54,16 +54,28 @@ public class FigureStorehouse {
         return null;
     }
 
-    public Figure getFromStorage(FigureType figureType, Point[] points) {
+    private boolean checkIsStorehouseEmpty(){
         for (FigurePlace figurePlace : storehouse) {
-            FigureType figurePlaceFigureType = figurePlace.getItem().getFigureType();
-            Point[] figurePlacePoints = figurePlace.getItem().getPoints();
-            int figurePlaceId = figurePlace.getId();
-            if (FigureUtil.getAreFiguresEquals(figurePlaceFigureType, figurePlacePoints, figureType, points)) {
-                return getFromStorage(figurePlaceId);
+            if(figurePlace!=null){
+                return false;
             }
+        }return true;
+    }
+    public Figure getFromStorage(FigureType figureType, Point[] points) {
+        if(!checkIsStorehouseEmpty()){
+            for (FigurePlace figurePlace : storehouse) {
+                FigureType figurePlaceFigureType = figurePlace.getItem().getFigureType();
+                Point[] figurePlacePoints = figurePlace.getItem().getPoints();
+                int figurePlaceId = figurePlace.getId();
+                if (FigureUtil.getAreFiguresEquals(figurePlaceFigureType, figurePlacePoints, figureType, points)) {
+                    return getFromStorage(figurePlaceId);
+                }
+            }
+            return null;
+        }else {
+            return null;
         }
-        return null;
+
     }
 
     public FigurePlace setId(Figure figure) {
@@ -73,7 +85,9 @@ public class FigureStorehouse {
     public Figure putToStorage(FigurePlace item) throws FigureException {
         if (getIsAnyFreePlace()) {
             storehouse[getFreePlaceIndex()] = item;
+            return item.getItem();
+        }else {
+            throw new FigureException();
         }
-        throw new FigureException();
     }
 }

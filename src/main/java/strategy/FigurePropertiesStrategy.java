@@ -3,9 +3,9 @@ package strategy;
 import model.Figure;
 
 public interface FigurePropertiesStrategy {
-    int calculateArea(Figure figure);
 
-    int calculatePerimeter(Figure figure);
+    double calculateArea(Figure figure);
+    double calculatePerimeter(Figure figure);
 
 
 }

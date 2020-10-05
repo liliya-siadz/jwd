@@ -14,17 +14,10 @@ public class TrianglePropertiesStrategy implements FigurePropertiesStrategy {
     private Point pointA;
     private Point pointB;
     private Point pointC;
-    private int lengthAB;
-    private int lengthAC;
-    private int lengthBC;
+    private double lengthAB;
+    private double lengthAC;
+    private double lengthBC;
     private TrianglePropertiesStrategy() {
-    }
-
-    public static boolean calculateIsExist(Point[] points) {
-        if (FigureUtil.getIsFigure(points)) {
-            return PointUtil.countMaxNumberOfPointsOnTheSameLine(points) == 2;
-        }
-        return false;
     }
 
     private void setPoints(Figure figure) {
@@ -41,14 +34,14 @@ public class TrianglePropertiesStrategy implements FigurePropertiesStrategy {
     }
 
     @Override
-    public int calculateArea(Figure figure) {
-        int p = calculatePerimeter(figure) / 2;
+    public double calculateArea(Figure figure) {
+        double p = calculatePerimeter(figure) / 2;
         double area = Math.sqrt(p * (p - lengthAB) * (p - lengthAC) * (p - lengthBC));
         return (int) area;
     }
 
     @Override
-    public int calculatePerimeter(Figure figure) {
+    public double calculatePerimeter(Figure figure) {
         setPoints(figure);
         setLengths();
         return lengthAB + lengthAC + lengthBC;

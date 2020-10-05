@@ -6,6 +6,55 @@ import model.Point;
 
 public class FigureUtil {
 
+    public static boolean calculateIsExist(FigureType figureType, Point[] points){
+        switch (figureType){
+            case LINE:
+                return calculateIsLine(points);
+            case TRIANGLE:
+                return calculateIsTriangle(points);
+            case SQUARE:
+                return calculateIsSquare(points);
+            default:
+                return false;
+        }
+    }
+
+    public static boolean calculateIsLine(Point[] points) {
+        if(points.length == FigureType.LINE.getPointsQuantity()){
+            return FigureUtil.getIsFigure(points);
+        }else {
+            return false;
+        }
+
+    }
+
+    public static boolean calculateIsTriangle(Point[] points) {
+        if(points.length == FigureType.TRIANGLE.getPointsQuantity()){
+            if (FigureUtil.getIsFigure(points)) {
+                return PointUtil.countMaxNumberOfPointsOnTheSameLine(points) == 2;
+            }else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
+
+    public static boolean calculateIsSquare(Point[] points) {
+        if(points.length == FigureType.SQUARE.getPointsQuantity()){
+            if (FigureUtil.getIsFigure(points)) {
+                //проверки
+                return false;
+            } else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+
+    }
+
     public static boolean getAreFiguresEquals(FigureType figureTypeA, Point[] pointsA,
                                               FigureType figureTypeB, Point[] pointsB) {
         if (figureTypeA == figureTypeB) {

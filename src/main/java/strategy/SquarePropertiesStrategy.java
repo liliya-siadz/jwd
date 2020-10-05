@@ -15,10 +15,10 @@ public class SquarePropertiesStrategy implements FigurePropertiesStrategy {
     private Point pointB;
     private Point pointC;
     private Point pointD;
-    private int lengthAB;
-    private int lengthAD;
-    private int lengthBC;
-    private int lengthCD;
+    private double lengthAB;
+    private double lengthAD;
+    private double lengthBC;
+    private double lengthCD;
     private SquarePropertiesStrategy() {
     }
 
@@ -29,13 +29,7 @@ public class SquarePropertiesStrategy implements FigurePropertiesStrategy {
         return instance;
     }
 
-    public static boolean calculateIsExist(Point[] points) {
-        if (FigureUtil.getIsFigure(points)) {
-            return PointUtil.countMaxNumberOfPointsOnTheSameLine(points) == 2;
-        } else {
-            return false;
-        }
-    }
+
 
     private void setPoints(Figure figure) {
         Point[] points = figure.getPoints();
@@ -53,14 +47,14 @@ public class SquarePropertiesStrategy implements FigurePropertiesStrategy {
     }
 
     @Override
-    public int calculateArea(Figure figure) {
-        int p = calculatePerimeter(figure) / 2;
+    public double calculateArea(Figure figure) {
+        double p = calculatePerimeter(figure) / 2;
         double area = Math.sqrt(p * (p - lengthAB) * (p - lengthAD) * (p - lengthBC) * (p - lengthCD));
         return (int) area;
     }
 
     @Override
-    public int calculatePerimeter(Figure figure) {
+    public double calculatePerimeter(Figure figure) {
         setPoints(figure);
         setLengths();
         return lengthAB + lengthAD + lengthBC + lengthCD;

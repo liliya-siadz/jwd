@@ -30,17 +30,14 @@ public abstract class Figure {
         return points;
     }
 
-    public int getPerimeter() {
+    public double getPerimeter() {
         return figurePropertiesStrategy.calculatePerimeter(this);
     }
 
-    public int getArea() {
+    public double getArea() {
         return figurePropertiesStrategy.calculateArea(this);
     }
 
-    public boolean getIsExist() {
-        return false;
-    }
 
     @Override
     public String toString() {
