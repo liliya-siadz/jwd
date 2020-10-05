@@ -1,7 +1,8 @@
-package strategy;
+package strategy.impl;
 
 import model.Figure;
 import model.Point;
+import strategy.FigurePropertiesStrategy;
 import util.LineUtil;
 
 public enum LinePropertiesStrategy implements FigurePropertiesStrategy {

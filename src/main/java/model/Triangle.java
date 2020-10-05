@@ -2,7 +2,7 @@ package model;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import strategy.TrianglePropertiesStrategy;
+import strategy.impl.TrianglePropertiesStrategy;
 
 public class Triangle extends Figure {
 

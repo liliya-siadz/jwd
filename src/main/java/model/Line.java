@@ -2,7 +2,7 @@ package model;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import strategy.LinePropertiesStrategy;
+import strategy.impl.LinePropertiesStrategy;
 
 public class Line extends Figure {
     static Logger logger = LoggerFactory.getLogger(Line.class);
