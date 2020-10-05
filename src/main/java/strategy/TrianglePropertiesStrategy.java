@@ -1,0 +1,57 @@
+package strategy;
+
+import model.Figure;
+import model.Point;
+import util.FigureUtil;
+import util.LineUtil;
+import util.PointUtil;
+
+
+public class TrianglePropertiesStrategy implements FigurePropertiesStrategy {
+    /*3 Simple Singleton not lazy realization
+     */
+    public static final TrianglePropertiesStrategy INSTANCE = new TrianglePropertiesStrategy();
+    private Point pointA;
+    private Point pointB;
+    private Point pointC;
+    private int lengthAB;
+    private int lengthAC;
+    private int lengthBC;
+    private TrianglePropertiesStrategy() {
+    }
+
+    public static boolean calculateIsExist(Point[] points) {
+        if (FigureUtil.getIsFigure(points)) {
+            return PointUtil.countMaxNumberOfPointsOnTheSameLine(points) == 2;
+        }
+        return false;
+    }
+
+    private void setPoints(Figure figure) {
+        Point[] points = figure.getPoints();
+        pointA = points[0];
+        pointB = points[1];
+        pointC = points[2];
+    }
+
+    private void setLengths() {
+        lengthAB = LineUtil.calculateLength(pointA, pointB);
+        lengthAC = LineUtil.calculateLength(pointA, pointC);
+        lengthBC = LineUtil.calculateLength(pointB, pointC);
+    }
+
+    @Override
+    public int calculateArea(Figure figure) {
+        int p = calculatePerimeter(figure) / 2;
+        double area = Math.sqrt(p * (p - lengthAB) * (p - lengthAC) * (p - lengthBC));
+        return (int) area;
+    }
+
+    @Override
+    public int calculatePerimeter(Figure figure) {
+        setPoints(figure);
+        setLengths();
+        return lengthAB + lengthAC + lengthBC;
+    }
+}
+
