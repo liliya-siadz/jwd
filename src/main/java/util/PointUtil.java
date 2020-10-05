@@ -4,6 +4,10 @@ import model.Point;
 
 public class PointUtil {
 
+    private PointUtil() {
+
+    }
+
     public static boolean calculateIsEqual(Point[] pointsA, Point[] pointsB) {
         int length1 = pointsA.length;
         int length2 = pointsB.length;

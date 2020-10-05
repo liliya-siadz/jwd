@@ -9,14 +9,6 @@ public enum LinePropertiesStrategy implements FigurePropertiesStrategy {
     /*2 Not Lazy Singleton realization using ENUM
      */
     INSTANCE;
-    private Point pointA;
-    private Point pointB;
-
-    private void setPoints(Figure figure) {
-        Point[] points = figure.getPoints();
-        pointA = points[0];
-        pointB = points[1];
-    }
 
     @Override
     public double calculateArea(Figure figure) {
@@ -25,7 +17,7 @@ public enum LinePropertiesStrategy implements FigurePropertiesStrategy {
 
     @Override
     public double calculatePerimeter(Figure figure) {
-        setPoints(figure);
-        return LineUtil.calculateLength(pointA, pointB);
+        Point[] points = figure.getPoints();
+        return LineUtil.calculateLength(points[0], points[1]);
     }
 }

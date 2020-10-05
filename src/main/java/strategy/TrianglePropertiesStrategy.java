@@ -9,9 +9,7 @@ public class TrianglePropertiesStrategy implements FigurePropertiesStrategy {
     /*3 Simple Singleton not lazy realization
      */
     public static final TrianglePropertiesStrategy INSTANCE = new TrianglePropertiesStrategy();
-    private Point pointA;
-    private Point pointB;
-    private Point pointC;
+
     private double lengthAB;
     private double lengthAC;
     private double lengthBC;
@@ -19,17 +17,11 @@ public class TrianglePropertiesStrategy implements FigurePropertiesStrategy {
     private TrianglePropertiesStrategy() {
     }
 
-    private void setPoints(Figure figure) {
+    private void setLengths(Figure figure) {
         Point[] points = figure.getPoints();
-        pointA = points[0];
-        pointB = points[1];
-        pointC = points[2];
-    }
-
-    private void setLengths() {
-        lengthAB = LineUtil.calculateLength(pointA, pointB);
-        lengthAC = LineUtil.calculateLength(pointA, pointC);
-        lengthBC = LineUtil.calculateLength(pointB, pointC);
+        lengthAB = LineUtil.calculateLength(points[0], points[1]);
+        lengthAC = LineUtil.calculateLength(points[0], points[2]);
+        lengthBC = LineUtil.calculateLength(points[1], points[2]);
     }
 
     @Override
@@ -41,8 +33,7 @@ public class TrianglePropertiesStrategy implements FigurePropertiesStrategy {
 
     @Override
     public double calculatePerimeter(Figure figure) {
-        setPoints(figure);
-        setLengths();
+        setLengths(figure);
         return lengthAB + lengthAC + lengthBC;
     }
 }

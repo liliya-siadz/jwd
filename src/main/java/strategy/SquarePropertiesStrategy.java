@@ -9,10 +9,7 @@ public class SquarePropertiesStrategy implements FigurePropertiesStrategy {
     /*1 Lazy Singleton realization
      */
     private static SquarePropertiesStrategy instance;
-    private Point pointA;
-    private Point pointB;
-    private Point pointC;
-    private Point pointD;
+
     private double lengthAB;
     private double lengthAD;
     private double lengthBC;
@@ -28,19 +25,12 @@ public class SquarePropertiesStrategy implements FigurePropertiesStrategy {
         return instance;
     }
 
-    private void setPoints(Figure figure) {
+    private void setLengths(Figure figure) {
         Point[] points = figure.getPoints();
-        pointA = points[0];
-        pointB = points[1];
-        pointC = points[2];
-        pointD = points[3];
-    }
-
-    private void setLengths() {
-        lengthAB = LineUtil.calculateLength(pointA, pointB);
-        lengthAD = LineUtil.calculateLength(pointA, pointD);
-        lengthBC = LineUtil.calculateLength(pointB, pointC);
-        lengthCD = LineUtil.calculateLength(pointC, pointD);
+        lengthAB = LineUtil.calculateLength(points[0], points[1]);
+        lengthAD = LineUtil.calculateLength(points[0], points[3]);
+        lengthBC = LineUtil.calculateLength(points[1], points[2]);
+        lengthCD = LineUtil.calculateLength(points[2], points[3]);
     }
 
     @Override
@@ -52,8 +42,7 @@ public class SquarePropertiesStrategy implements FigurePropertiesStrategy {
 
     @Override
     public double calculatePerimeter(Figure figure) {
-        setPoints(figure);
-        setLengths();
+        setLengths(figure);
         return lengthAB + lengthAD + lengthBC + lengthCD;
     }
 }

@@ -69,7 +69,8 @@ public class FigureStorehouse {
                 FigureType figurePlaceFigureType = figurePlace.getItem().getFigureType();
                 Point[] figurePlacePoints = figurePlace.getItem().getPoints();
                 int figurePlaceId = figurePlace.getId();
-                if (FigureUtil.getAreFiguresEquals(figurePlaceFigureType, figurePlacePoints, figureType, points)) {
+                if (FigureUtil.getAreFiguresEquals(figurePlaceFigureType,
+                        figurePlacePoints, figureType, points)) {
                     return getFromStorage(figurePlaceId);
                 } else {
                     return null;

@@ -7,6 +7,7 @@ import model.FigureFactory;
 public interface FigurePostProcessor {
 
     default Figure process(Figure figure) throws FigureException {
-        return FigureFactory.figureStorehouse.putToStorage(FigureFactory.figureStorehouse.setId(figure));
+        return FigureFactory.figureStorehouse.
+                putToStorage(FigureFactory.figureStorehouse.setId(figure));
     }
 }

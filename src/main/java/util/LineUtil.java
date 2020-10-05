@@ -7,6 +7,9 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 public class LineUtil {
+    private LineUtil() {
+
+    }
 
     public static double calculateLength(Line line) {
         Point[] points = line.getPoints();

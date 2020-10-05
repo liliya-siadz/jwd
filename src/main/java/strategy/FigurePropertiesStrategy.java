@@ -7,6 +7,4 @@ public interface FigurePropertiesStrategy {
     double calculateArea(Figure figure);
 
     double calculatePerimeter(Figure figure);
-
-
 }

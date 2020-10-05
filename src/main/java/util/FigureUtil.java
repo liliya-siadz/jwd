@@ -5,6 +5,8 @@ import model.FigureType;
 import model.Point;
 
 public class FigureUtil {
+    private FigureUtil() {
+    }
 
     public static boolean calculateIsExist(FigureType figureType, Point[] points) {
         switch (figureType) {
