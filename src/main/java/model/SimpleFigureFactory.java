@@ -33,8 +33,6 @@ public class SimpleFigureFactory implements FigureFactory {
         }
     }
 
-    public int countProducedFigures() {
-        return figureStorehouse.getNumberOfOccupiedFigurePlaces();
-    }
+
 }
 
