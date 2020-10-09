@@ -9,6 +9,8 @@ import model.Point;
 import model.SimpleFigureFactory;
 
 public class ApplicationContext {
+    private ApplicationContext() {
+    }
     public static Figure createFigure(FigureType figureType, Point[] figureConstituents) throws FigureException {
         return PostProcessingFactory.getInstance(PreProcessingFactory.getInstance(SimpleFigureFactory.getInstance())).createFigure(figureType,
                 figureConstituents);

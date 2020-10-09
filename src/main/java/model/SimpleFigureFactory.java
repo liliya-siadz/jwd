@@ -32,7 +32,5 @@ public class SimpleFigureFactory implements FigureFactory {
                 throw new FactoryException();
         }
     }
-
-
 }
 
