@@ -1,6 +1,5 @@
 package strategy.impl;
 
-import model.Figure;
 import model.Point;
 import strategy.FigurePropertiesStrategy;
 import util.LineUtil;
@@ -12,13 +11,12 @@ public enum LinePropertiesStrategy implements FigurePropertiesStrategy {
     INSTANCE;
 
     @Override
-    public double calculateArea(Figure figure) {
+    public double calculateArea(Point[] figureConstituents) {
         return 0;
     }
 
     @Override
-    public double calculatePerimeter(Figure figure) {
-        Point[] points = figure.getPoints();
-        return LineUtil.calculateLength(points[0], points[1]);
+    public double calculatePerimeter(Point[] figureConstituents) {
+        return LineUtil.calculateLength(figureConstituents[0], figureConstituents[1]);
     }
 }

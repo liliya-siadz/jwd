@@ -8,13 +8,13 @@ public enum FigureType {
     PENTAGON(5),
     HEXAGON(6);
 
-    private final int pointsQuantity;
+    private final int figureConstituentsQuantity;
 
-    FigureType(int pointsQuantity) {
-        this.pointsQuantity = pointsQuantity;
+    FigureType(int figureConstituentsQuantity) {
+        this.figureConstituentsQuantity = figureConstituentsQuantity;
     }
 
     public int getPointsQuantity() {
-        return pointsQuantity;
+        return figureConstituentsQuantity;
     }
 }

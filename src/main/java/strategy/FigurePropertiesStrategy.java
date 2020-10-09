@@ -1,10 +1,10 @@
 package strategy;
 
-import model.Figure;
+import model.Point;
 
 public interface FigurePropertiesStrategy {
 
-    double calculateArea(Figure figure);
+    double calculateArea(Point[] figureConstituents);
 
-    double calculatePerimeter(Figure figure);
+    double calculatePerimeter(Point[] figureConstituents);
 }

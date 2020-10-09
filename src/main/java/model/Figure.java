@@ -8,18 +8,23 @@ public abstract class Figure {
     private static Integer id = 0;
     private final FigureType figureType;
     private final FigurePropertiesStrategy figurePropertiesStrategy;
-    protected Point[] points;
+    private final Point[] figureConstituents;
 
     Figure(FigureType figureType,
-           FigurePropertiesStrategy figurePropertiesStrategy) {
+           FigurePropertiesStrategy figurePropertiesStrategy, Point[] figureConstituents) {
 
         this.figurePropertiesStrategy = figurePropertiesStrategy;
         this.figureType = figureType;
-        Figure.id++;
+        this.figureConstituents = figureConstituents;
+        gainId();
     }
 
     public static Integer getId() {
         return id;
+    }
+
+    private void gainId() {
+        Figure.id++;
     }
 
     public FigureType getFigureType() {
@@ -27,22 +32,22 @@ public abstract class Figure {
     }
 
     public Point[] getPoints() {
-        return points;
+        return figureConstituents;
     }
 
     public double getPerimeter() {
-        return figurePropertiesStrategy.calculatePerimeter(this);
+        return figurePropertiesStrategy.calculatePerimeter(figureConstituents);
     }
 
     public double getArea() {
-        return figurePropertiesStrategy.calculateArea(this);
+        return figurePropertiesStrategy.calculateArea(figureConstituents);
     }
 
 
     @Override
     public String toString() {
         return String.format("%s (%s)\n",
-                getFigureType(), PointUtil.printCoordinates(points));
+                getFigureType(), PointUtil.printCoordinates(figureConstituents));
     }
 }
 

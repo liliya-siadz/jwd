@@ -1,11 +1,12 @@
 package model;
 
 
-import exception.FigureException;
+import exception.storehouse.StorehouseHasNoPlace;
 import util.FigureUtil;
 
 public class FigureStorehouse {
-
+    /* Singleton
+     */
 
     private static final int STOREHOUSE_MAX_SIZE = 100;
 
@@ -24,25 +25,31 @@ public class FigureStorehouse {
     }
 
     private boolean getIsAnyFreePlace() {
-        boolean isAnyFreePlace = false;
         for (FigurePlace figurePlace : storehouse) {
             if (figurePlace == null) {
-                isAnyFreePlace = true;
-                break;
+                return true;
             }
         }
-        return isAnyFreePlace;
+        return false;
     }
 
-    private int getFreePlaceIndex() {
-        int freePlaceIndex = 0;
-        for (int i = 0; i < storehouse.length; i++) {
-            if (storehouse[i] == null) {
-                freePlaceIndex = i;
-                break;
+    public void printAllItems() {
+        for (FigurePlace figurePlace : storehouse) {
+            if (figurePlace != null) {
+                System.out.println(figurePlace.getItem());
             }
         }
-        return freePlaceIndex;
+    }
+
+    private int getFreePlaceIndex() throws StorehouseHasNoPlace {
+        if (getIsAnyFreePlace()) {
+            for (int i = 0; i < storehouse.length; i++) {
+                if (storehouse[i] == null) {
+                    return i;
+                }
+            }
+        }
+        throw new StorehouseHasNoPlace();
     }
 
     private Figure getFromStorage(int id) {
@@ -54,7 +61,7 @@ public class FigureStorehouse {
         return null;
     }
 
-    private boolean checkIsStorehouseEmpty() {
+    private boolean getIsStoreHouseEmpty() {
         for (FigurePlace figurePlace : storehouse) {
             if (figurePlace != null) {
                 return false;
@@ -63,46 +70,50 @@ public class FigureStorehouse {
         return true;
     }
 
-    public Figure getFromStorage(FigureType figureType, Point[] points) {
-        if (!checkIsStorehouseEmpty()) {
+    private FigurePlace findInStorage(FigureType figureType, Point[] figureConstituents) {
+        if (!getIsStoreHouseEmpty()) {
             for (FigurePlace figurePlace : storehouse) {
-                FigureType figurePlaceFigureType = figurePlace.getItem().getFigureType();
-                Point[] figurePlacePoints = figurePlace.getItem().getPoints();
-                int figurePlaceId = figurePlace.getId();
-                if (FigureUtil.getAreFiguresEquals(figurePlaceFigureType,
-                        figurePlacePoints, figureType, points)) {
-                    return getFromStorage(figurePlaceId);
-                } else {
-                    return null;
+                if (figurePlace != null) {
+                    if (FigureUtil.getAreFiguresEquals(
+                            figurePlace.getItem().getFigureType(),
+                            figurePlace.getItem().getPoints(),
+                            figureType, figureConstituents)) {
+                        return figurePlace;
+                    }
                 }
             }
             return null;
-        } else {
-            return null;
         }
+        return null;
+    }
 
+    public Figure getFromStorage(FigureType figureType, Point[] figureConstituents) {
+        FigurePlace figurePlace = findInStorage(figureType, figureConstituents);
+        if (figurePlace != null) {
+            return getFromStorage(figurePlace.getId());
+        }
+        return null;
     }
 
     public FigurePlace setId(Figure figure) {
         return new FigurePlace(figure, Figure.getId());
     }
 
-    public Figure putToStorage(FigurePlace item) throws FigureException {
-        if (getIsAnyFreePlace()) {
-            storehouse[getFreePlaceIndex()] = item;
-            return item.getItem();
-        } else {
-            throw new FigureException();
-        }
+    public Figure putToStorage(FigurePlace item) throws StorehouseHasNoPlace {
+        int t = getFreePlaceIndex();
+        storehouse[t] = item;
+        storehouse[t].setId(Figure.getId());
+        return storehouse[t].getItem();
     }
 
-    public int countOccupiedFigurePlaces() {
-        int numberOfOccupiedFigurePlaces = 0;
+    public int getNumberOfOccupiedFigurePlaces() {
+        int i = 0;
         for (FigurePlace figurePlace : storehouse) {
             if (figurePlace != null) {
-                numberOfOccupiedFigurePlaces++;
+                i++;
             }
         }
-        return numberOfOccupiedFigurePlaces;
+        return i;
     }
+
 }

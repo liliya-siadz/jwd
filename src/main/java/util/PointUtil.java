@@ -5,36 +5,24 @@ import model.Point;
 public class PointUtil {
 
     private PointUtil() {
-
     }
 
-    public static boolean calculateIsEqual(Point[] pointsA, Point[] pointsB) {
-        int length1 = pointsA.length;
-        int length2 = pointsB.length;
-        if (length1 == length2) {
-            boolean isEqual = true;
-            boolean[] temp = new boolean[length1];
-            for (int i = 0; i < length1; i++) {
-                temp[i] = false;
-            }
-            for (int i = 0; i < length1; i++) {
-                for (int j = 0; j < length1; j++) {
-                    if (PointUtil.calculateIsEqual(pointsA[i], pointsB[j])) {
-                        temp[i] = true;
-                        break;
+    public static boolean calculateIsEqual(Point[] figureConstituentsA, Point[] figureConstituentsB) {
+        int lengthA = figureConstituentsA.length;
+        int length2 = figureConstituentsB.length;
+        if (lengthA == length2) {
+            int t = 0;
+            for (int i = 0; i < lengthA; i++) {
+                for (int j = 0; j < lengthA; j++) {
+                    if (PointUtil.calculateIsEqual(figureConstituentsA[i], figureConstituentsB[j])) {
+                        t++;
                     }
                 }
             }
-            for (int i = 0; i < length1; i++) {
-                if (temp[i] == false) {
-                    isEqual = false;
-                    break;
-                }
-            }
-            return isEqual;
-        } else {
-            return false;
+            return (t == lengthA);
         }
+        return false;
+
     }
 
     public static boolean calculateIsEqual(Point pointA, Point pointB) {
@@ -45,11 +33,11 @@ public class PointUtil {
         return ((coordinateA1 == coordinateA2) & (coordinateB1 == coordinateB2));
     }
 
-    public static String printCoordinates(Point... points) {
+    public static String printCoordinates(Point... figureConstituents) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < points.length; i++) {
-            stringBuilder.append(points[i]);
-            if (i < points.length - 1) {
+        for (int i = 0; i < figureConstituents.length; i++) {
+            stringBuilder.append(figureConstituents[i]);
+            if (i < figureConstituents.length - 1) {
                 stringBuilder.append(",");
             }
         }
@@ -57,22 +45,16 @@ public class PointUtil {
     }
 
     public static boolean calculateIsPointsOnOneLine(Point pointA, Point pointB) {
-        boolean temp1 = (pointA.getCoordinateA() == pointB.getCoordinateA());
-        boolean temp2 = (pointA.getCoordinateB() == pointB.getCoordinateB());
-        return temp1 | temp2;
+        return (pointA.getCoordinateA() == pointB.getCoordinateA()) | (pointA.getCoordinateB() == pointB.getCoordinateB());
     }
 
-    public static int countMaxNumberOfPointsOnTheSameLine(Point[] points) {
+    public static int countMaxNumberOfPointsOnTheSameLine(Point[] figureConstituents) {
         int numberOfPointsOnOneLine = 1;
-        for (int i = 0; i < points.length - 1; i++) {
-            if (calculateIsPointsOnOneLine(points[i], points[i + 1])) {
+        for (int i = 0; i < figureConstituents.length - 1; i++) {
+            if (calculateIsPointsOnOneLine(figureConstituents[i], figureConstituents[i + 1])) {
                 numberOfPointsOnOneLine++;
             }
         }
         return numberOfPointsOnOneLine;
-    }
-
-    public static int[] getLengths(Point[] points) {
-        return null;
     }
 }

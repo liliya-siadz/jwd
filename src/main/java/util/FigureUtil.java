@@ -1,6 +1,6 @@
 package util;
 
-import model.Figure;
+import exception.factory.FactoryException;
 import model.FigureType;
 import model.Point;
 
@@ -8,80 +8,62 @@ public class FigureUtil {
     private FigureUtil() {
     }
 
-    public static boolean calculateIsExist(FigureType figureType, Point[] points) {
-        switch (figureType) {
-            case LINE:
-                return calculateIsLine(points);
-            case TRIANGLE:
-                return calculateIsTriangle(points);
-            case SQUARE:
-                return calculateIsSquare(points);
-            default:
-                return false;
-        }
-    }
 
-    public static boolean calculateIsLine(Point[] points) {
-        if (points.length == FigureType.LINE.getPointsQuantity()) {
-            return FigureUtil.getIsFigure(points);
-        } else {
-            return false;
-        }
+    public static boolean calculateIsExist(FigureType figureType, Point[] figureConstituents) throws FactoryException {
+        if (getIsFigure(figureConstituents)) {
+            switch (figureType) {
+                case LINE:
+                    return calculateIsLine(figureConstituents);
+                case TRIANGLE:
+                    return calculateIsTriangle(figureConstituents);
+                case SQUARE:
+                    return calculateIsSquare(figureConstituents);
+                default:
 
-    }
-
-    public static boolean calculateIsTriangle(Point[] points) {
-        if (points.length == FigureType.TRIANGLE.getPointsQuantity()) {
-            if (FigureUtil.getIsFigure(points)) {
-                return PointUtil.countMaxNumberOfPointsOnTheSameLine(points) == 2;
-            } else {
-                return false;
+                    throw new FactoryException();
             }
-        } else {
-            return false;
         }
-    }
-
-
-    public static boolean calculateIsSquare(Point[] points) {
-        if (points.length == FigureType.SQUARE.getPointsQuantity()) {
-            //logics in process...
-            return FigureUtil.getIsFigure(points);
-        } else {
-            return false;
-        }
+        return false;
 
     }
 
-    public static boolean getAreFiguresEquals(FigureType figureTypeA, Point[] pointsA,
-                                              FigureType figureTypeB, Point[] pointsB) {
+    public static boolean calculateIsLine(Point[] figureConstituents) {
+        return figureConstituents.length == FigureType.LINE.getPointsQuantity();
+    }
+
+    public static boolean calculateIsTriangle(Point[] figureConstituents) {
+        if (figureConstituents.length == FigureType.TRIANGLE.getPointsQuantity()) {
+            return PointUtil.countMaxNumberOfPointsOnTheSameLine(figureConstituents) == 2;
+        }
+        return false;
+    }
+
+
+    public static boolean calculateIsSquare(Point[] figureConstituents) {
+        return (figureConstituents.length == FigureType.SQUARE.getPointsQuantity());
+        //logics in process...
+    }
+
+    public static boolean getAreFiguresEquals(FigureType figureTypeA, Point[] figureConstituentsA,
+                                              FigureType figureTypeB, Point[] figureConstituentsB) {
         if (figureTypeA == figureTypeB) {
-            return PointUtil.calculateIsEqual(pointsA, pointsB);
+            return PointUtil.calculateIsEqual(figureConstituentsA, figureConstituentsB);
         }
         return false;
     }
 
-    public static boolean getAreFiguresEquals(Figure figureA, Figure figureB) {
-        if (figureA.getFigureType() == figureB.getFigureType()) {
-            Point[] pointsA = figureA.getPoints();
-            Point[] pointsB = figureB.getPoints();
-            return PointUtil.calculateIsEqual(pointsA, pointsB);
-        }
-        return false;
-    }
-
-    public static boolean getIsFigure(Point[] points) {
-        int pointsQuantity = points.length;
-        if (pointsQuantity > 1) {
-            for (int i = 0; i < pointsQuantity - 1; i++) {
-                if (PointUtil.calculateIsEqual(points[i], points[i + 1])) {
+    public static boolean getIsFigure(Point[] figureConstituents) {
+        int figureConstituentsQuantity = figureConstituents.length;
+        if (figureConstituentsQuantity > 1) {
+            int i = 0;
+            do {
+                if (PointUtil.calculateIsEqual(figureConstituents[i], figureConstituents[i + 1])) {
                     return false;
                 }
-            }
+                i++;
+            } while (i < figureConstituentsQuantity - 1);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
-
 }
