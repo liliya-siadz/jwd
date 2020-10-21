@@ -16,7 +16,8 @@ public class ApplicationContext {
 
     public static Figure createFigure(FigureType figureType, List<Point> figureConstituents) throws FigureException {
         return PostProcessingFactory.
-                getInstance(PreProcessingFactory.getInstance(SimpleFigureFactory.getInstance())).createFigure(figureType, figureConstituents);
+                getInstance(PreProcessingFactory.getInstance(SimpleFigureFactory.getInstance()))
+                .createFigure(figureType, figureConstituents);
     }
 }
 

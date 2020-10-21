@@ -8,10 +8,9 @@ import java.util.List;
 
 
 public class TrianglePropertiesStrategy implements FigurePropertiesStrategy {
-    /*3 Simple Singleton not lazy realization
-     */
-    public static final TrianglePropertiesStrategy INSTANCE = new TrianglePropertiesStrategy();
 
+    /* 3 Simple Singleton not lazy realization */
+    public static final TrianglePropertiesStrategy INSTANCE = new TrianglePropertiesStrategy();
 
     private TrianglePropertiesStrategy() {
     }

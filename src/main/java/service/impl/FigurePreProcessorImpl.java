@@ -17,8 +17,7 @@ public enum FigurePreProcessorImpl implements FigurePreProcessor {
 
     public Figure process(FigureType figureType, List<Point> figureConstituents) throws FigureException {
         if (FigureUtil.calculateIsExist(figureType, figureConstituents)) {
-            return SimpleFigureFactory.figureStorehouse.getFromStorage(figureType, figureConstituents);
-
+            return SimpleFigureFactory.figureStorehouse.getFromStorage(figureType, figureConstituents).get();
         }
         throw new FigureNotExistException();
     }

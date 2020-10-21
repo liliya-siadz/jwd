@@ -12,7 +12,6 @@ public class FigureUtil {
     private FigureUtil() {
     }
 
-
     public static boolean calculateIsExist(FigureType figureType, List<Point> figureConstituents) throws FigureNotExistException, FactoryException {
         if ((getIsNotNull(figureType, figureConstituents)) && (getIsFigure(figureConstituents))) {
             switch (figureType) {

@@ -7,7 +7,6 @@ import static java.lang.Math.sqrt;
 
 public class LineUtil {
     private LineUtil() {
-
     }
 
     public static double calculateLength(Point pointA, Point pointB) {

@@ -8,8 +8,7 @@ import java.util.List;
 
 public class SquarePropertiesStrategy implements FigurePropertiesStrategy {
 
-    /*1 Lazy Singleton realization
-     */
+    /* 1 Lazy Singleton realization */
     private static SquarePropertiesStrategy instance;
 
     private SquarePropertiesStrategy() {

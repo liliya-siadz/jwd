@@ -11,7 +11,6 @@ public class PointUtil {
     private PointUtil() {
     }
 
-
     public static boolean calculateIsEqual(List<Point> figureConstituentsA, List<Point> figureConstituentsB) {
         return figureConstituentsA.containsAll(figureConstituentsB);
     }
@@ -44,11 +43,9 @@ public class PointUtil {
         return String.valueOf(stringBuilder);
     }
 
-
     public static boolean calculateIsPointsOnOneLine(Point pointA, Point pointB) {
         return (pointA.getCoordinateA() == pointB.getCoordinateA()) | (pointA.getCoordinateB() == pointB.getCoordinateB());
     }
-
 
     public static int countMaxNumberOfPointsOnTheSameLine(List<Point> figureConstituents) {
         return new HashSet<Point>(figureConstituents).size() - figureConstituents.size() + 1;

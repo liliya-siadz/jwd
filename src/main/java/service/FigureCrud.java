@@ -2,8 +2,6 @@ package service;
 
 import exception.FigureException;
 import model.Figure;
-import model.FigureType;
-import model.Point;
 
 import java.util.List;
 
@@ -20,6 +18,6 @@ public interface FigureCrud {
 
     Figure Find(Figure figure);
 
-    Figure FindByCriteria(FigureType figureType, List<Point> figureConstituents);
+    Figure FindByCriteria(Criteria criteria);
 
 }

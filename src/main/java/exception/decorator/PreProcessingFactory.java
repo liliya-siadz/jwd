@@ -14,8 +14,9 @@ import java.util.Map;
 
 
 public class PreProcessingFactory extends FigureFactoryDecorator {
+
     /*
-        PreProcessors has three states:ON/OFF/EXTRA(turbo state: 2 preprocessors works)
+      PreProcessors has three states:ON/OFF/EXTRA(turbo state: 2 preprocessors works)
      */
     private static ProcessingStates state = ProcessingStates.ON;
     private static PreProcessingFactory instance;

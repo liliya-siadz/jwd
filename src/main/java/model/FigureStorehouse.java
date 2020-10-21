@@ -8,9 +8,8 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 public class FigureStorehouse {
-    /* Singleton
-     */
 
+    /* Singleton */
     private static final int STOREHOUSE_MAX_SIZE = 100;
     private static FigureStorehouse instance;
     private final Map<Integer, Figure> storehouse;
@@ -34,6 +33,10 @@ public class FigureStorehouse {
                 .map(Map.Entry::getKey).findFirst();
     }
 
+    public Map<Integer, Figure> followStorage() {
+        return storehouse;
+    }
+
     public Optional<Figure> getFromStorage(int id) {
         return Optional.ofNullable(storehouse.get(id));
 
@@ -48,8 +51,8 @@ public class FigureStorehouse {
         return false;
     }
 
-    public Figure getFromStorage(FigureType figureType, List<Point> figureConstituents) {
-        return findInStorage(figureType, figureConstituents).get();
+    public Optional<Figure> getFromStorage(FigureType figureType, List<Point> figureConstituents) {
+        return findInStorage(figureType, figureConstituents);
     }
 
     private Optional<Figure> findInStorage(FigureType figureType, List<Point> figureConstituents) {

@@ -8,8 +8,7 @@ import java.util.List;
 
 public enum LinePropertiesStrategy implements FigurePropertiesStrategy {
 
-    /*2 Not Lazy Singleton realization using ENUM
-     */
+    /* 2 Not Lazy Singleton realization using ENUM */
     INSTANCE;
 
     @Override

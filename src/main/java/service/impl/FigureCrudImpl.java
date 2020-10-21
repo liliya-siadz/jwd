@@ -3,13 +3,13 @@ package service.impl;
 import exception.FigureException;
 import factory.ApplicationContext;
 import model.Figure;
-import model.FigureType;
-import model.Point;
 import model.SimpleFigureFactory;
+import service.Criteria;
 import service.FigureCrud;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FigureCrudImpl implements FigureCrud {
     @Override
@@ -39,17 +39,29 @@ public class FigureCrudImpl implements FigureCrud {
 
     @Override
     public Figure FindById(int id) {
-        return SimpleFigureFactory.figureStorehouse.getFromStorage(id).get();
+        return SimpleFigureFactory.figureStorehouse.followStorage().get(id);
     }
 
     @Override
     public Figure Find(Figure figure) {
-        return SimpleFigureFactory.figureStorehouse.getFromStorage(figure.getFigureType(),
-                figure.getFigureConstituents());
+        return SimpleFigureFactory.figureStorehouse.followStorage().values().stream()
+                .filter(figure::equals)
+                .findFirst()
+                .get()
+                ;
     }
 
     @Override
-    public Figure FindByCriteria(FigureType figureType, List<Point> figureConstituents) {
+    public Figure FindByCriteria(Criteria criteria) {
+        Map<Integer, Figure> map = SimpleFigureFactory.figureStorehouse.followStorage();
+        while (map.values().iterator().hasNext()) {
+            Figure f = map.values().iterator().next();
+            Criteria c = new Criteria.Builder(f.getFigureType(), f.getFigureConstituents()).build();
+            if (criteria.equals(c)) {
+                return f;
+            }
+        }
         return null;
+
     }
 }

@@ -11,9 +11,8 @@ import service.impl.FigurePostProcessorImpl;
 import java.util.List;
 
 public class PostProcessingFactory extends FigureFactoryDecorator {
-    /*
-        PostProcessor has two states:ON/OFF
-     */
+
+    /* PostProcessor has two states:ON/OFF */
     private static PostProcessingFactory instance;
     private static ProcessingStates state = ProcessingStates.OFF;
     private final FigurePostProcessor figurePostProcessor;
