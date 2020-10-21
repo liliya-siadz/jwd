@@ -2,27 +2,18 @@ package util;
 
 import model.Point;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class PointUtil {
 
     private PointUtil() {
     }
 
-    public static boolean calculateIsEqual(Point[] figureConstituentsA, Point[] figureConstituentsB) {
-        int lengthA = figureConstituentsA.length;
-        int length2 = figureConstituentsB.length;
-        if (lengthA == length2) {
-            int t = 0;
-            for (int i = 0; i < lengthA; i++) {
-                for (int j = 0; j < lengthA; j++) {
-                    if (PointUtil.calculateIsEqual(figureConstituentsA[i], figureConstituentsB[j])) {
-                        t++;
-                    }
-                }
-            }
-            return (t == lengthA);
-        }
-        return false;
 
+    public static boolean calculateIsEqual(List<Point> figureConstituentsA, List<Point> figureConstituentsB) {
+        return figureConstituentsA.containsAll(figureConstituentsB);
     }
 
     public static boolean calculateIsEqual(Point pointA, Point pointB) {
@@ -44,17 +35,22 @@ public class PointUtil {
         return String.valueOf(stringBuilder);
     }
 
+    public static String printCoordinates(List<Point> figureConstituents) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int i = 0;
+        while (i < figureConstituents.size() - 1) {
+            stringBuilder.append(figureConstituents.stream().map(point -> point + ",").collect(Collectors.toList()));
+        }
+        return String.valueOf(stringBuilder);
+    }
+
+
     public static boolean calculateIsPointsOnOneLine(Point pointA, Point pointB) {
         return (pointA.getCoordinateA() == pointB.getCoordinateA()) | (pointA.getCoordinateB() == pointB.getCoordinateB());
     }
 
-    public static int countMaxNumberOfPointsOnTheSameLine(Point[] figureConstituents) {
-        int numberOfPointsOnOneLine = 1;
-        for (int i = 0; i < figureConstituents.length - 1; i++) {
-            if (calculateIsPointsOnOneLine(figureConstituents[i], figureConstituents[i + 1])) {
-                numberOfPointsOnOneLine++;
-            }
-        }
-        return numberOfPointsOnOneLine;
+
+    public static int countMaxNumberOfPointsOnTheSameLine(List<Point> figureConstituents) {
+        return new HashSet<Point>(figureConstituents).size() - figureConstituents.size() + 1;
     }
 }

@@ -5,7 +5,9 @@ import model.Figure;
 import model.FigureType;
 import model.Point;
 
+import java.util.List;
+
 public interface FigurePreProcessor {
 
-    Figure process(FigureType figureType, Point[] figureConstituents) throws FigureException;
+    Figure process(FigureType figureType, List<Point> figureConstituents) throws FigureException;
 }

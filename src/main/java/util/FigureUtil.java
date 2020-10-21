@@ -1,16 +1,20 @@
 package util;
 
 import exception.factory.FactoryException;
+import exception.figuretype.FigureNotExistException;
+import model.Figure;
 import model.FigureType;
 import model.Point;
+
+import java.util.List;
 
 public class FigureUtil {
     private FigureUtil() {
     }
 
 
-    public static boolean calculateIsExist(FigureType figureType, Point[] figureConstituents) throws FactoryException {
-        if (getIsFigure(figureConstituents)) {
+    public static boolean calculateIsExist(FigureType figureType, List<Point> figureConstituents) throws FigureNotExistException, FactoryException {
+        if ((getIsNotNull(figureType, figureConstituents)) && (getIsFigure(figureConstituents))) {
             switch (figureType) {
                 case LINE:
                     return calculateIsLine(figureConstituents);
@@ -19,7 +23,6 @@ public class FigureUtil {
                 case SQUARE:
                     return calculateIsSquare(figureConstituents);
                 default:
-
                     throw new FactoryException();
             }
         }
@@ -27,43 +30,46 @@ public class FigureUtil {
 
     }
 
-    public static boolean calculateIsLine(Point[] figureConstituents) {
-        return figureConstituents.length == FigureType.LINE.getPointsQuantity();
+    public static boolean calculateIsLine(List<Point> figureConstituents) {
+        return figureConstituents.size() == FigureType.LINE.getPointsQuantity();
     }
 
-    public static boolean calculateIsTriangle(Point[] figureConstituents) {
-        if (figureConstituents.length == FigureType.TRIANGLE.getPointsQuantity()) {
-            return PointUtil.countMaxNumberOfPointsOnTheSameLine(figureConstituents) == 2;
-        }
-        return false;
+    public static boolean calculateIsTriangle(List<Point> figureConstituents) {
+        return (figureConstituents.size() == FigureType.TRIANGLE.getPointsQuantity()) &&
+                PointUtil.countMaxNumberOfPointsOnTheSameLine(figureConstituents) == 2;
     }
 
 
-    public static boolean calculateIsSquare(Point[] figureConstituents) {
-        return (figureConstituents.length == FigureType.SQUARE.getPointsQuantity());
+    public static boolean calculateIsSquare(List<Point> figureConstituents) {
+        return (figureConstituents.size() == FigureType.SQUARE.getPointsQuantity());
         //logics in process...
     }
 
-    public static boolean getAreFiguresEquals(FigureType figureTypeA, Point[] figureConstituentsA,
-                                              FigureType figureTypeB, Point[] figureConstituentsB) {
-        if (figureTypeA == figureTypeB) {
-            return PointUtil.calculateIsEqual(figureConstituentsA, figureConstituentsB);
-        }
-        return false;
+    public static boolean getAreFiguresEquals(FigureType figureTypeA, List<Point> figureConstituentsA,
+                                              FigureType figureTypeB, List<Point> figureConstituentsB) {
+        return figureTypeA == figureTypeB && PointUtil.calculateIsEqual(figureConstituentsA, figureConstituentsB);
     }
 
-    public static boolean getIsFigure(Point[] figureConstituents) {
-        int figureConstituentsQuantity = figureConstituents.length;
-        if (figureConstituentsQuantity > 1) {
-            int i = 0;
-            do {
-                if (PointUtil.calculateIsEqual(figureConstituents[i], figureConstituents[i + 1])) {
-                    return false;
-                }
-                i++;
-            } while (i < figureConstituentsQuantity - 1);
+    public static boolean getAreFiguresEquals(Figure figureA, Figure figureB) {
+        return figureA.getFigureType() == figureB.getFigureType() && PointUtil.calculateIsEqual(figureA.getFigureConstituents(),
+                figureB.getFigureConstituents());
+    }
+
+    public static boolean getAreFiguresEquals(Figure figureA, FigureType figureTypeB, List<Point> figureConstituentsB) {
+        return figureA.getFigureType() == figureTypeB && PointUtil.calculateIsEqual(figureA.getFigureConstituents(),
+                figureConstituentsB);
+    }
+
+
+    public static boolean getIsFigure(List<Point> figureConstituents) {
+        return figureConstituents.size() > 1 && (figureConstituents.stream().distinct().count()) == (figureConstituents.size());
+    }
+
+    public static boolean getIsNotNull(FigureType figureType, List<Point> figureConstituents) throws FigureNotExistException {
+        if (figureType != null && figureConstituents != null) {
             return true;
         }
-        return false;
+        throw new FigureNotExistException();
+
     }
 }

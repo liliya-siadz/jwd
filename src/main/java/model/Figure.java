@@ -3,15 +3,17 @@ package model;
 import strategy.FigurePropertiesStrategy;
 import util.PointUtil;
 
+import java.util.List;
+
 public abstract class Figure {
 
     private static Integer id = 0;
     private final FigureType figureType;
     private final FigurePropertiesStrategy figurePropertiesStrategy;
-    private final Point[] figureConstituents;
+    private final List<Point> figureConstituents;
 
     Figure(FigureType figureType,
-           FigurePropertiesStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+           FigurePropertiesStrategy figurePropertiesStrategy, List<Point> figureConstituents) {
 
         this.figurePropertiesStrategy = figurePropertiesStrategy;
         this.figureType = figureType;
@@ -31,7 +33,7 @@ public abstract class Figure {
         return figureType;
     }
 
-    public Point[] getPoints() {
+    public List<Point> getFigureConstituents() {
         return figureConstituents;
     }
 
